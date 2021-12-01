@@ -1,5 +1,5 @@
 ---
-title: "Mixed-Effects Regression as a Complement to Traditional Repeated Measures Analysis of Variance in Sports Biomechanics Research"
+title: "Multilevel Regression Modeling as a Complement to Traditional Repeated Measures Analysis of Variance in Sports Biomechanics Research"
 output: 
   pdf_document:
     toc: false
@@ -45,7 +45,7 @@ Keywords: multilevel, hierarchical, longitudinal, growth curve
 \linenumbers
 \begin{abstract}
 \doublespacing
-Mixed-effects regression is a powerful, flexible, yet neglected analysis method in the sports biomechanics literature. In this paper, we hope to draw increased attention to this underused research tool and lobby for its increased adaptation when examining repeated measures biomechanics data. First, we introduce the rationale and approach underlying mixed-effects regression. We then go through examples using simulated and real-world data to illustrate its potential application in sports biomechanics research. Lastly, we provide some recommendations, words of caution, and additional resources.
+Multilevel modeling is a powerful, flexible, yet neglected analysis method in the sports biomechanics literature. In this paper, we hope to draw increased attention to this underused research tool and lobby for its increased adaptation when examining repeated measures biomechanics data. First, we introduce the rationale and approach underlying multilevel regression models. We then go through examples using simulated and real-world data to illustrate their potential application in sports biomechanics research. Lastly, we provide some recommendations, words of caution, and additional resources.
 \end{abstract}
 
 \newpage
@@ -58,9 +58,9 @@ Two research practices commonly reduce data volume in sports biomechanics resear
 
 While sometimes appropriate depending on the research question, discretization and ensemble averaging reduce the dimensionality and variability in time series data. While discretization can be ameliorated though emerging techniques such as statistical parametric mapping \cite{pataky2019}, some researchers may still wish to examine certain discrete measures if warranted by their domain expertise and research question of interest. For these scenarios, we feel methodological improvements are still available, particularly when it comes to the handling of repeated measures data in biomechanical settings. 
 
-Typically, repeated measures data in sports biomechanics are examined using univariate or multivariate repeated measures analysis of (co)variance. While these statistical tools are appropriate under certain conditions, they make several assumptions that may often be unrealistic in the observational or quasi-experimental settings common in sport biomechanics research. In such cases, mixed-effects regression modeling can complement more traditional repeated measures analyses. Compared with traditional univariate or multivariate analysis of (co)variance, mixed-effects models allow more researcher flexibility through fewer statistical assumptions and the ability to handle missing data, non-linear relationships, and time-varying covariates \cite{hox2017}.
+Typically, repeated measures data in sports biomechanics are examined using univariate or multivariate repeated measures analysis of (co)variance. While these statistical tools are appropriate under certain conditions, they make several assumptions that may often be unrealistic in the observational or quasi-experimental settings common in sport biomechanics research. In such cases, multilevel modeling can complement more traditional repeated measures analyses. Compared with traditional univariate or multivariate analysis of (co)variance, multilevel modeling allow more researcher flexibility through fewer statistical assumptions and the ability to handle missing data, non-linear relationships, and time-varying covariates \cite{hox2017}.
 
-Although mixed-effects techniques are present in other sport performance domains such as sport psychology \cite{beauchamp2005,benson2016,cornelius2007}, they have yet to make much headway into sport biomechanics. If fact, to our knowledge, the use of mixed-effects regression in sport biomechanics is limited to two papers, both published since 2019 \cite{slowik2019, iglesias2021}. Slowik et. al. used a mixed-effects framework to contrast the strong within and weak between-participant relationships between elbow joint loading and baseball pitching speed \cite{slowik2019} while Iglesias et. al. examined between-participant differences in the within-participant load-velocity relationship during several weightlifting exercises \cite{iglesias2021}. Although these two papers provide important insight into their respective research areas, we feel a formal introduction of the advantages, disadvantages, and limitations of mixed-effects regression would benefit those in sport biomechanics working with repeated measures designs. Therefore, our purpose is to introduce mixed-effects regression to a sports biomechanics audience and offer a brief tutorial on model notation, construction, and interpretation. We also outline the advantages and disadvantages of mixed-effects modeling over traditional repeated measures designs and offer recommendations for those interested in further exploration of mixed-effects techniques.
+Although multilevel techniques are present in other sport performance domains such as sport psychology \cite{beauchamp2005,benson2016,cornelius2007}, they have yet to make significant headway into sport biomechanics. If fact, to our knowledge, the use of multilevel modeling in sport biomechanics is limited to two papers, both published since 2019 \cite{slowik2019, iglesias2021}. Slowik et. al. used a multilevel framework to contrast the strong within and weak between-participant relationships between elbow joint loading and baseball pitching speed \cite{slowik2019} while Iglesias et. al. examined between-participant differences in the within-participant load-velocity relationship during several weightlifting exercises \cite{iglesias2021}. Although these two papers provide important insight into their respective research areas, we feel a formal introduction of the advantages, disadvantages, and limitations of multilevel modeling would benefit those in sport biomechanics working with repeated measures designs. Therefore, our purpose is to introduce mixed-effects regression to a sports biomechanics audience and offer a brief tutorial on model notation, construction, and interpretation. We also outline the advantages and disadvantages of multilevel modeling over traditional repeated measures designs and offer recommendations for those interested in further exploration of mixed-effects techniques.
 
 # The Traditional Regression Model
 
@@ -84,7 +84,7 @@ In Equation \ref{eq:reg1}, $\beta_{0}$ represents the model intercept and $\beta
 
 The one-predictor linear regression model can be extended to multiple regression by adding additional predictor variables (i.e. $x_{2}$, $x_{3}...x_{n}$) or to non-linear regression by adding polynomial (i.e. $x^{2}, x^{3}...x^{n}$), exponential ($e^{x}$), or logarithmic ($ln(x)$) terms. Additionally, how predictor variables' effects depend on one another can be examined by introducing their product terms (i.e. $x_{1}*x_{2}$) and analyzing their interactions. Although flexible, traditional regression-based analyses do not take into account the nested nature of repeated measures data (i.e. trials nested within participants) and can, therefore, be inappropriate for repeated measures data.
 
-# The Mixed-Effects Regression Model
+# The Multilevel Regression Model
 
 The three assumptions made by repeated measures ANOVA that are most relevant to sport biomechanics: temporal equivalence, design balance, and case completeness.
 
@@ -99,7 +99,7 @@ Simple pre-post designs with no missing data
 \centering
 \captionsetup{width=0.6\textwidth}
 \includegraphics[width=0.6\textwidth]{rand_int.png}
-\caption{Fictional mixed-effects model with random intercepts. Individual regression lines are parallel (equal slopes) but differ in their respecitve intercepts}
+\caption{Fictional multilevel model with random intercepts. Individual regression lines are parallel (equal slopes) but differ in their respective intercepts}
 \label{fig-rand-int}
 \end{figure}
 
@@ -107,7 +107,7 @@ Simple pre-post designs with no missing data
 \centering
 \captionsetup{width=0.6\textwidth}
 \includegraphics[width=0.6\textwidth]{rand_slope.png}
-\caption{Fictional mixed-effects model with random slopes. Individual regression lines are not parallel (unequal slopes) but share a mutual intercept}
+\caption{Fictional multilevel model with random slopes. Individual regression lines are not parallel (unequal slopes) but share a mutual intercept}
 \label{fig-rand-slope}
 \end{figure}
 
@@ -115,7 +115,7 @@ Simple pre-post designs with no missing data
 \centering
 \captionsetup{width=0.6\textwidth}
 \includegraphics[width=0.6\textwidth]{rand_int_slope.png}
-\caption{Fictional mixed-effects model with random intercepts and slopes. Individual regression lines are not parrallel and do not share a mutual intercept}
+\caption{Fictional multilevel model with random intercepts and slopes. Individual regression lines are not parallel and do not share a mutual intercept}
 \label{fig-rand-int-slope}
 \end{figure}
 
