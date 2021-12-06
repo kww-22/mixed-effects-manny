@@ -1,0 +1,227 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Multilevel Regression Modeling as a Complement to Traditional Repeated Measures Analysis of Variance in Sports Biomechanics Research},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{authblk}
+\usepackage{color,soul}
+\usepackage{setspace}
+\usepackage{etoolbox,lineno}
+\usepackage{amsmath}
+\usepackage{threeparttable}
+\usepackage{hhline}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{array,multirow}
+\usepackage[superscript]{cite}
+\usepackage[acronym,toc,nonumberlist]{glossaries} 
+\renewcommand*{\contentsname}{Table of Contents}
+\setlength{\parindent}{0.375in}
+\author[1]{\footnotesize Kyle Wasserberger}
+\author[3]{\footnotesize William Murrah}
+\author[4]{\footnotesize Kevin Giordano}
+\author[2]{\footnotesize Gretchen Oliver}
+\affil[1]{Research \& Development; Driveline Baseball}
+\affil[2]{School of Kinesiology; Auburn University}
+\affil[3]{\footnotesize Department of Educational Foundations, Leadership, \& Technology; Auburn University}
+\affil[4]{\footnotesize Department of Physical Therapy; Creighton University}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Multilevel Regression Modeling as a Complement to Traditional Repeated Measures Analysis of Variance in Sports Biomechanics Research}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\pagenumbering{gobble}
+\begin{center}
+Keywords: multilevel, hierarchical, longitudinal, growth curve
+\end{center}
+
+\newpage
+\linenumbers
+\begin{abstract}
+\doublespacing
+Multilevel modeling is a powerful, flexible, yet neglected analysis method in the sports biomechanics literature. In this paper, we hope to draw increased attention to this underused research tool and lobby for its increased adaptation when examining repeated measures biomechanics data. First, we introduce the rationale and approach underlying multilevel regression models. We then go through examples using simulated and real-world data to illustrate their potential application in sports biomechanics research. Lastly, we provide some recommendations, words of caution, and additional resources.
+\end{abstract}
+
+\newpage
+\pagenumbering{arabic}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+\doublespacing
+
+We biomechanists like to throw away lots of data. Our cameras capture the positions of dozens of reflective markers with sub-millimeter accuracy hundreds of times each second while our participants perform several, sometimes dozens, of movement trials during data collection. Each new trial brings additional data that could increase statistical power and be used to better understand our research questions. Yet, far too often, choices related to experimental design or statistical analysis greatly reduce the volume of data we work with. Reduced data volume negatively impacts inferential power when conducting statistical analyses and can potentially indicate inefficient use of data collection resources and research labor.
+
+Two research practices commonly reduce data volume in sports biomechanics research studies: discretization and ensemble averaging. Discretization occurs when researchers extract one value, such as a maxima, minima, or average value, from a continuous\footnote{Yes, yes, biomechanics time series data are limited to the measurement rate of the camera, force plate, etc... and not \textit{truly} continuous; but you get the point} time series of data. Ensemble averaging occurs when researchers combine several trials from the same participant into one \emph{representative} trial. Discretization and ensemble averaging can also be combined to further reduce the available data by averaging discrete values from multiple trials or taking discrete values from ensemble averaged time series.
+
+While sometimes appropriate depending on the research question, discretization and ensemble averaging reduce the dimensionality and variability in time series data. While discretization can be ameliorated though emerging techniques such as statistical parametric mapping \cite{pataky2019}, some researchers may still wish to examine certain discrete measures if warranted by their domain expertise and research question of interest. For these scenarios, we feel methodological improvements are still available, particularly when it comes to the handling of repeated measures data in biomechanical settings.
+
+Typically, repeated measures data in sports biomechanics are examined using univariate or multivariate repeated measures analysis of (co)variance. While these statistical tools are appropriate under certain conditions, they make several assumptions that may often be unrealistic in the observational or quasi-experimental settings common in sport biomechanics research. In such cases, multilevel modeling can complement more traditional repeated measures analyses. Compared with traditional univariate or multivariate analysis of (co)variance, multilevel modeling allow more researcher flexibility through fewer statistical assumptions and the ability to handle missing data, non-linear relationships, and time-varying covariates \cite{hox2017}.
+
+Although multilevel techniques are present in other sport performance domains such as sport psychology \cite{beauchamp2005,benson2016,cornelius2007}, they have yet to make significant headway into sport biomechanics. If fact, to our knowledge, the use of multilevel modeling in sport biomechanics is limited to two papers, both published since 2019 \cite{slowik2019, iglesias2021}. Slowik et. al.~used a multilevel framework to contrast the strong within and weak between-participant relationships between elbow joint loading and baseball pitching speed \cite{slowik2019} while Iglesias et. al.~examined between-participant differences in the within-participant load-velocity relationship during several weightlifting exercises \cite{iglesias2021}. Although these two papers provide important insight into their respective research areas, we feel a formal introduction of the advantages, disadvantages, and limitations of multilevel modeling would benefit those in sport biomechanics working with repeated measures designs. Therefore, our purpose is to introduce mixed-effects regression to a sports biomechanics audience and offer a brief tutorial on model notation, construction, and interpretation. We also outline the advantages and disadvantages of multilevel modeling over traditional repeated measures designs and offer recommendations for those interested in further exploration of mixed-effects techniques.
+
+\hypertarget{the-traditional-regression-model}{%
+\section{The Traditional Regression Model}\label{the-traditional-regression-model}}
+
+Before examining the mixed-effects regression model, let us first consider a simple linear regression predicting some outcome measure, \(y\), from one predictor variable, \(x\), given by Equation \ref{eq:reg1}:
+
+\begin{equation}
+\hat{y}_{i}=\beta_{0}+\beta_{1}x_{i}+\epsilon_{i}
+\label{eq:reg1}
+\end{equation}
+
+\noindent
+In Equation \ref{eq:reg1}, \(\beta_{0}\) represents the model intercept and \(\beta_{1}\) represents the model slope. Recall that a model intercept can be thought of as the predicted value of \(y\) when \(x\) equals zero and a model slope can be thought of as the predicted increase (or decrease, if negative) in \(y\) for a 1-unit increase in \(x\). \(\epsilon_{i}\) represents the residual error between the \(i\)-th model prediction and the \(i\)-th observed data point (\(\hat{y}_{i}-y_{i}\)) (Figure \ref{fig1}).
+
+\begin{figure}
+\centering
+\captionsetup{width=0.6\textwidth}
+\includegraphics[width=0.6\textwidth]{fig1.png}
+\caption{Hypothetical Simple Regression}
+\label{fig1}
+\end{figure}
+
+The one-predictor linear regression model can be extended to multiple regression by adding additional predictor variables (i.e.~\(x_{2}\), \(x_{3}...x_{n}\)) or to non-linear regression by adding polynomial (i.e.~\(x^{2}, x^{3}...x^{n}\)), exponential (\(e^{x}\)), or logarithmic (\(ln(x)\)) terms. Additionally, how predictor variables' effects depend on one another can be examined by introducing their product terms (i.e.~\(x_{1}*x_{2}\)) and analyzing their interactions. Although flexible, traditional regression-based analyses do not take into account the nested nature of repeated measures data (i.e.~trials nested within participants) and can, therefore, be inappropriate for repeated measures data.
+
+\hypertarget{the-multilevel-regression-model}{%
+\section{The Multilevel Regression Model}\label{the-multilevel-regression-model}}
+
+The three assumptions made by repeated measures ANOVA that are most relevant to sport biomechanics: temporal equivalence, design balance, and case completeness.
+
+\hypertarget{when-anova-will-do-just-fine}{%
+\section{When ANOVA will do just fine}\label{when-anova-will-do-just-fine}}
+
+Simple pre-post designs with no missing data
+
+\hypertarget{other-figures-to-incorporate}{%
+\section{Other Figures to incorporate}\label{other-figures-to-incorporate}}
+
+\begin{figure}
+\centering
+\captionsetup{width=0.6\textwidth}
+\includegraphics[width=0.6\textwidth]{rand_int.png}
+\caption{Fictional multilevel model with random intercepts. Individual regression lines are parallel (equal slopes) but differ in their respective intercepts}
+\label{fig-rand-int}
+\end{figure}
+
+\begin{figure}
+\centering
+\captionsetup{width=0.6\textwidth}
+\includegraphics[width=0.6\textwidth]{rand_slope.png}
+\caption{Fictional multilevel model with random slopes. Individual regression lines are not parallel (unequal slopes) but share a mutual intercept}
+\label{fig-rand-slope}
+\end{figure}
+
+\begin{figure}
+\centering
+\captionsetup{width=0.6\textwidth}
+\includegraphics[width=0.6\textwidth]{rand_int_slope.png}
+\caption{Fictional multilevel model with random intercepts and slopes. Individual regression lines are not parallel and do not share a mutual intercept}
+\label{fig-rand-int-slope}
+\end{figure}
+
+\begin{table}[H]
+\begin{center}
+\captionsetup{width=0.6\textwidth}
+\begin{threeparttable}
+\begin{tabular}{lrr}
+\toprule
+& \multicolumn{1}{c}{Traditional ANOVA} & \multicolumn{1}{c}{Mixed-Effects Regression} \\ 
+\cline{2-3}
+Problematic Assumption 1 & Boo & Yay \\
+Questionable Assumption 2 & Not really & Definitely \\
+Tricky Real-World Data Thing & No way, Jose & No big deal \\
+\hhline{===}
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\scriptsize{\item this is my table caption you can cite stuff here too \cite{wasserberger2021}}
+\end{tablenotes}
+\caption{This will be the ANOVA/MLM comparison table used to emphasize how awesome mixed-effects modeling is}
+\end{threeparttable}
+\label{tbl:anova_mlm_comp}
+\end{center}
+\end{table}
+
+\hypertarget{discard-pile}{%
+\section{Discard Pile}\label{discard-pile}}
+
+Some of the more notable assumptions that can cause problems for sport biomechanists dealing with repeated measures include temporal equivalence (i.e.~time between data points must be the same for all participants), balanced study designs (i.e.~must have the same number of data points for each individual) and case completeness (i.e.~must have no missing data).
+
+\newpage
+\singlespacing
+\addcontentsline{toc}{section}{References}
+\bibliographystyle{plain-custom}
+\bibliography{mlm_sport_biomech}
+
+\end{document}
