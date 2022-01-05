@@ -1,9 +1,11 @@
 \usepackage{authblk}
+\usepackage{array}
 \usepackage{color,soul}
 \usepackage{setspace}
 \usepackage{etoolbox,lineno}
 \usepackage{amsmath}
 \usepackage{threeparttable}
+\usepackage{tabularx}
 \usepackage{hhline}
 \usepackage{booktabs}
 \usepackage{float}
@@ -21,3 +23,6 @@
 \affil[2]{School of Kinesiology; Auburn University}
 \affil[3]{\footnotesize Department of Educational Foundations, Leadership, \& Technology; Auburn University}
 \affil[4]{\footnotesize Department of Physical Therapy; Creighton University}
+\newcolumntype{L}[1]{>{\small\raggedright\let\newline\\\arraybackslash\hspace{-1pt}}p{#1}}
+\newcolumntype{C}[1]{>{\small\centering\let\newline\\\arraybackslash\hspace{-1pt}}p{#1}}
+\newcolumntype{R}[1]{>{\small\raggedleft\let\newline\\\arraybackslash\hspace{-1pt}}p{#1}}
