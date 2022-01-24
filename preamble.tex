@@ -4,6 +4,7 @@
 \usepackage{setspace}
 \usepackage{etoolbox,lineno}
 \usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{threeparttable}
 \usepackage{tabularx}
 \usepackage{hhline}
@@ -12,10 +13,13 @@
 \usepackage{caption}
 \usepackage{array,multirow}
 \usepackage[superscript]{cite}
-\usepackage[acronym,toc,nonumberlist]{glossaries} 
+\usepackage[acronym,toc,nonumberlist]{glossaries}
+\usepackage[small]{titlesec}
+\usepackage[none]{hyphenat}
 \renewcommand*{\contentsname}{Table of Contents}
+\renewcommand{\thefootnote}{\roman{footnote}}
 \setlength{\parindent}{0.375in}
-\author[1]{\footnotesize Kyle Wasserberger}
+\author[1,2]{\footnotesize Kyle Wasserberger}
 \author[3]{\footnotesize William Murrah}
 \author[4]{\footnotesize Kevin Giordano}
 \author[2]{\footnotesize Gretchen Oliver}
