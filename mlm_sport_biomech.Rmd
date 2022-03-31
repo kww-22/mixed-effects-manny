@@ -84,9 +84,9 @@ ICC=\frac{\sigma_{u_{0}}^{2}}{\sigma_{u_{0}^{2}}+\sigma_{e}^{2}}
 \end{equation}
 
 \noindent
-Where $\sigma_{u_{0}}^{2}$ and $\sigma_{e}^{2}$ represent the between-group and within-group variances, respectively. Under highly dependent data conditions (where most variance is accounted for by the nested data structure), the ICC will approach 1.0 since Equation \ref{eq:icc} simplifies to $\frac{\sigma_{u_{0}}^{2}}{\sigma_{u_{0}}^{2}}$ as $\sigma_{e}^{2}$ trends towards zero. Conversely, the ICC will approach zero under highly independent data since Equation \ref{eq:icc} simplifies to $\frac{0}{\sigma_{e}^{2}}$ as $\sigma_{u_{0}}^{2}$ trends towards zero.
+Where $\sigma_{u_{0}}^{2}$ and $\sigma_{e}^{2}$ represent the between-group and within-group variances, respectively. Under highly dependent data conditions (where most variance is accounted for by the nested data structure), the ICC will approach 1.0 since Equation \ref{eq:icc} simplifies to $\frac{\sigma_{u_{0}}^{2}}{\sigma_{u_{0}}^{2}}$ as $\sigma_{e}^{2}$ trends towards zero. Conversely, the ICC will approach zero under highly independent data (where little to no variance is accounted for by the nested data structure) since Equation \ref{eq:icc} simplifies to $\frac{0}{\sigma_{e}^{2}}$ as $\sigma_{u_{0}}^{2}$ trends towards zero.
 
-In practice, the ICC will lay somewhere between 0 and 1. Most important for the applied researcher, even apparently small deviations from 0 can drastically inflate type 1 error rates if ordinary least squares methods are used \cite{musca2011}. 
+In practice, the ICC will lay somewhere between 0 and 1. Most important for the applied researcher, even apparently small deviations from 0 can drastically inflate type 1 error rates if ordinary least squares methods are used \cite{musca2011}. Here, the researcher is forced to either a) analyze only one trial per participant (not possible in longitudinal designs), b) aggregate data from 
 
 ---
 
